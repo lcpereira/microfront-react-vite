@@ -1,0 +1,19 @@
+{
+  "name": "microfront-react-vite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "run-p dev:portal preview:project-a preview:project-b preview:project-c",
+    "dev:portal": "cd portal && yarn dev --mode development",
+    "preview:project-a": "cd project-a && yarn build --mode development && yarn preview --port 5001",
+    "preview:project-b": "cd project-b && yarn build --mode development && yarn preview --port 5002",
+    "preview:project-c": "cd project-c && yarn build --mode development && yarn preview --port 5003"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

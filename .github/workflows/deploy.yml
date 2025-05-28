@@ -1,0 +1,52 @@
+name: Deploy All
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Build Project A
+        run: |
+          cd project-a
+          yarn install
+          yarn build
+          cd ..
+          mkdir -p final-dist/project-a
+          cp -R project-a/dist/* final-dist/project-a/
+
+      - name: Build Project B
+        run: |
+          cd project-b
+          yarn install
+          yarn build
+          cd ..
+          mkdir -p final-dist/project-b
+          cp -R project-b/dist/* final-dist/project-b/
+
+      - name: Build Portal
+        run: |
+          cd portal
+          yarn install
+          yarn build
+          cd ..
+          mkdir -p final-dist
+          cp -R portal/dist/* final-dist/
+
+      - name: Deploy all to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./final-dist
+          force_orphan: true
