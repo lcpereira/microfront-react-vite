@@ -44,9 +44,11 @@ jobs:
           mkdir -p final-dist
           cp -R portal/dist/* final-dist/
 
-      - name: Deploy all to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./final-dist
-          force_orphan: true
+          path: ./final-dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
