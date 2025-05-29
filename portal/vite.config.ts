@@ -24,6 +24,11 @@ export default defineConfig(({ mode }) => {
         exposes: {
           './authStore': './src/stores/authStore.ts',
           './registerStore': './src/stores/registerStore.ts',
+          './components/Button': './src/components/Button.tsx',
+          './components/Input': './src/components/Input.tsx',
+          './components/Checkbox': './src/components/Checkbox.tsx',
+          './components/Layout': './src/components/Layout.tsx',
+          './components/Table': './src/components/Table.tsx',
         },
         shared: ['react', 'react-dom', 'zustand']
       })
