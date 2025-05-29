@@ -1,14 +1,9 @@
-declare module 'project_a/App' {
+declare module 'register/App' {
     const App: React.ComponentType;
     export default App;
 }
 
-declare module 'project_b/App' {
-    const App: React.ComponentType;
-    export default App;
-}
-
-declare module 'project_c/App' {
+declare module 'upload/App' {
     interface UploadProps {
       email?: string;
     }

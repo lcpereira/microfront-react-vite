@@ -5,8 +5,8 @@ import Login from '../pages/Login';
 import Home from '../pages/Home';
 import { useAuthStore } from '../stores/authStore';
 
-const RemoteCadastro = lazy(() => import('project_b/App'));
-const RemoteUpload = lazy(() => import('project_c/App'));
+const RemoteCadastro = lazy(() => import('register/App'));
+const RemoteUpload = lazy(() => import('upload/App'));
 
 export const AppRoutes = () => {
   const { user } = useAuthStore();
