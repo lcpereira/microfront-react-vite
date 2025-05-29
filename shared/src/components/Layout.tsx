@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthStore } from '../stores/authStore';
-import theme from '../src/theme/theme';
+import theme from '../theme/theme';
 import Button from './Button';
 
 export default function Layout({ children }: { children: React.ReactNode }) {

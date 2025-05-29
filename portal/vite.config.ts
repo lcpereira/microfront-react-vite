@@ -18,17 +18,9 @@ export default defineConfig(({ mode }) => {
       federation({
         name: 'portal',
         remotes: {
-          register: `${getRemoteUrl('5001')}/register/assets/remoteEntry.js`,
-          upload: `${getRemoteUrl('5002')}/upload/assets/remoteEntry.js`,
-        },
-        exposes: {
-          './authStore': './src/stores/authStore.ts',
-          './registerStore': './src/stores/registerStore.ts',
-          './components/Button': './src/components/Button.tsx',
-          './components/Input': './src/components/Input.tsx',
-          './components/Checkbox': './src/components/Checkbox.tsx',
-          './components/Layout': './src/components/Layout.tsx',
-          './components/Table': './src/components/Table.tsx',
+          shared: `${getRemoteUrl('5001')}/shared/assets/remoteEntry.js`,
+          register: `${getRemoteUrl('5002')}/register/assets/remoteEntry.js`,
+          upload: `${getRemoteUrl('5003')}/upload/assets/remoteEntry.js`,
         },
         shared: ['react', 'react-dom', 'zustand']
       })

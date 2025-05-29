@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "run-p dev:portal preview:register preview:upload",
+    "dev": "run-p preview:shared dev:portal preview:register preview:upload",
     "dev:portal": "cd portal && yarn dev --mode development",
-    "preview:register": "cd register && yarn build --mode development && yarn preview --port 5001",
-    "preview:upload": "cd upload && yarn build --mode development && yarn preview --port 5002"
+    "preview:shared": "cd shared && yarn build --mode development && yarn preview --port 5001",
+    "preview:register": "cd register && yarn build --mode development && yarn preview --port 5002",
+    "preview:upload": "cd upload && yarn build --mode development && yarn preview --port 5003"
   },
   "keywords": [],
   "author": "",

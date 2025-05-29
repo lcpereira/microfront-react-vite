@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from '../src/theme/theme';
+import theme from '../theme/theme';
 import type { Column } from '../utils/defineColumns';
 
 interface TableProps<T> {

@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react';
 import { ProtectedRoute } from './ProtectedRoute';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
-import { useAuthStore } from '../stores/authStore';
+import { useAuthStore } from 'shared/stores/authStore';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
 
 const RemoteCadastro = lazy(() => import('register/App'));

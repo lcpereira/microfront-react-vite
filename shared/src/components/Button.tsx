@@ -1,5 +1,5 @@
 import { type ButtonHTMLAttributes } from 'react';
-import theme from '../src/theme/theme';
+import theme from '../theme/theme';
 
 export default function Button({ children, ...res }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (

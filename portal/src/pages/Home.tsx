@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../stores/authStore';
-import { useRegisterStore } from '../stores/registerStore';
-import Layout from '../components/Layout';
-import Table from '../components/Table';
-import { defineColumns } from '../utils/defineColumns';
-import Button from '../components/Button';
-import theme from '../src/theme/theme';
+import { useAuthStore } from 'shared/stores/authStore';
+import { useRegisterStore } from 'shared/stores/registerStore';
+import Layout from 'shared/components/Layout';
+import Table from 'shared/components/Table';
+import Button from 'shared/components/Button';
+import theme from 'shared/theme';
 
 export default function Home() {
   const { user } = useAuthStore();
@@ -18,7 +17,7 @@ export default function Home() {
   const hasRegisterPermission = user?.permissions.includes('register');
   const hasUploadPermission = user?.permissions.includes('upload');
 
-  const registerColumns = defineColumns<Register>([
+  const registerColumns = ([
     { key: 'email', label: 'E-mail' },
     { key: 'select', label: 'Opção' },
     {
@@ -30,7 +29,7 @@ export default function Home() {
     { key: 'file', label: 'Arquivo' },
   ]);
 
-  const uploadColumns = defineColumns<UploadInfo>([
+  const uploadColumns = ([
     { key: 'fileName', label: 'Arquivo' },
     {
       key: 'timestamp',

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../stores/authStore';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import Checkbox from '../components/Checkbox';
-import theme from '../src/theme/theme';
+import { useAuthStore } from 'shared/stores/authStore';
+import Input from 'shared/components/Input';
+import Button from 'shared/components/Button';
+import Checkbox from 'shared/components/Checkbox';
+import theme from 'shared/theme';
 
 export default function Login() {
   const login = useAuthStore((s) => s.login);
