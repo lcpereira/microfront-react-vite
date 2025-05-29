@@ -21,7 +21,7 @@ export const AppRoutes = () => {
         <Route path="/register" element={<ProtectedRoute><RemoteCadastro /></ProtectedRoute>} />
         <Route path="/register/upload" element={<ProtectedRoute><RemoteUpload email={user?.email} /></ProtectedRoute>} />
 
-        <Route path="/" element={<Navigate to="/a" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="*" element={<Navigate to="/" />} />
     </Routes>
     </Suspense>
