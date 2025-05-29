@@ -4,6 +4,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
 import { useAuthStore } from '../stores/authStore';
+import { PublicOnlyRoute } from './PublicOnlyRoute';
 
 const RemoteCadastro = lazy(() => import('register/App'));
 const RemoteUpload = lazy(() => import('upload/App'));
@@ -14,7 +15,7 @@ export const AppRoutes = () => {
   return (
     <Suspense fallback={<div>Carregando...</div>}>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<PublicOnlyRoute><Login /></PublicOnlyRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/home/upload" element={<ProtectedRoute><RemoteUpload /></ProtectedRoute>} />
 

@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
         },
         exposes: {
           './authStore': './src/stores/authStore.ts',
+          './registerStore': './src/stores/registerStore.ts',
         },
         shared: ['react', 'react-dom', 'zustand']
       })
