@@ -1,0 +1,29 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { ProtectedRoute } from './ProtectedRoute';
+import Login from '../pages/Login';
+import Home from '../pages/Home';
+import { useAuthStore } from '../stores/authStore';
+
+const RemoteCadastro = lazy(() => import('project_b/App'));
+const RemoteUpload = lazy(() => import('project_c/App'));
+
+export const AppRoutes = () => {
+  const { user } = useAuthStore();
+
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/home/upload" element={<ProtectedRoute><RemoteUpload /></ProtectedRoute>} />
+
+        <Route path="/register" element={<ProtectedRoute><RemoteCadastro /></ProtectedRoute>} />
+        <Route path="/register/upload" element={<ProtectedRoute><RemoteUpload email={user?.email} /></ProtectedRoute>} />
+
+        <Route path="/" element={<Navigate to="/a" />} />
+        <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
+    </Suspense>
+  );
+};

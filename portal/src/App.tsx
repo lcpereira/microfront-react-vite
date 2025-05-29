@@ -1,10 +1,13 @@
-import { useUserStore } from './stores/user';
-import { AppRoutes } from './routes';
-import { Login } from './components/Login';
+import { BrowserRouter } from 'react-router-dom';
+import { AppRoutes } from './routes/AppRoutes';
+import './App.css';
 
-export default function App() {
-  const user = useUserStore((s) => s.user);
-
-  if (!user) return <Login />;
-  return <AppRoutes />;
+function App() {
+  return (
+    <BrowserRouter basename="/microfront-react-vite">
+      <AppRoutes />
+    </BrowserRouter>
+  );
 }
+
+export default App;

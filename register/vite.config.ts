@@ -4,11 +4,11 @@ import federation from '@originjs/vite-plugin-federation';
 
 export default defineConfig(() => {
   return {
-    base: '/microfront-react-vite/project-b',
+    base: '/microfront-react-vite/register',
     plugins: [
       react(),
       federation({
-        name: 'project_b',
+        name: 'register',
         filename: 'remoteEntry.js',
         exposes: {
           './App': './src/App.tsx',
@@ -16,13 +16,14 @@ export default defineConfig(() => {
         shared: ['react', 'react-dom']
       })
     ],
-    server: { port: 5002 },
-    preview: { port: 5002 },
+    server: { port: 5001 },
+    preview: { port: 5001 },
     build: {
       target: 'esnext',
       outDir: 'dist',
-      minify: false,
-      cssCodeSplit: false
+      rollupOptions: {
+        input: {},
+      },
     }
   };
 });

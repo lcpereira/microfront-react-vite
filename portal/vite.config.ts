@@ -18,12 +18,10 @@ export default defineConfig(({ mode }) => {
       federation({
         name: 'portal',
         remotes: {
-          project_a: `${getRemoteUrl('5001')}/project-a/assets/remoteEntry.js`,
-          project_b: `${getRemoteUrl('5002')}/project-b/assets/remoteEntry.js`,
-          project_c: `${getRemoteUrl('5003')}/project-c/assets/remoteEntry.js`,
+          register: `${getRemoteUrl('5001')}/register/assets/remoteEntry.js`,
+          upload: `${getRemoteUrl('5002')}/upload/assets/remoteEntry.js`,
         },
         exposes: {
-          './Login': './src/components/Login.tsx',
           './authStore': './src/stores/user.ts',
         },
         shared: ['react', 'react-dom', 'zustand']
