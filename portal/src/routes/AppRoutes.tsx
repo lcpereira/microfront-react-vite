@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { ProtectedRoute } from './ProtectedRoute';
+import { PublicOnlyRoute } from './PublicOnlyRoute';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
-import { useAuthStore } from 'shared/stores/authStore';
-import { PublicOnlyRoute } from './PublicOnlyRoute';
+import useAuthStore from 'shared/stores/authStore';
 
 const RemoteCadastro = lazy(() => import('register/App'));
 const RemoteUpload = lazy(() => import('upload/App'));

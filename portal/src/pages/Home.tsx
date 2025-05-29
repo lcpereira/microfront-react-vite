@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from 'shared/stores/authStore';
-import { useRegisterStore } from 'shared/stores/registerStore';
+import useAuthStore from 'shared/stores/authStore';
+import useRegisterStore from 'shared/stores/registerStore';
 import Layout from 'shared/components/Layout';
 import Table from 'shared/components/Table';
 import Button from 'shared/components/Button';
 import theme from 'shared/theme';
+import { useEffect } from 'react';
 
 export default function Home() {
   const { user } = useAuthStore();
@@ -37,6 +38,16 @@ export default function Home() {
       render: (row) => new Date(row.timestamp).toLocaleString(),
     },
   ]);
+
+  useEffect(() => {
+    if (registerStore.tempUpload) {
+      const fileName = registerStore.tempUpload.name;
+      const timestamp = Date.now();
+
+      registerStore.addUpload({ fileName, timestamp });
+      registerStore.clearTempUpload();
+    }
+  }, [registerStore, registerStore.tempUpload])
 
   return (
     <Layout>

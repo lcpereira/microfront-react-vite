@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from 'shared/stores/authStore';
+import useAuthStore from 'shared/stores/authStore';
 import Input from 'shared/components/Input';
 import Button from 'shared/components/Button';
 import Checkbox from 'shared/components/Checkbox';
@@ -73,7 +73,6 @@ const styles: { [key: string]: React.CSSProperties } = {
   imageContainer: {
     flex: '0 0 20%',
     minWidth: 250,
-    background: '#FDE6C2',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

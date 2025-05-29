@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
-interface Register {
+export interface Register {
   email: string;
   select: string;
   multiSelect: string[];
   text: string;
 }
 
-interface UploadInfo {
+export interface UploadInfo {
   email?: string;
   fileName: string;
   timestamp: number;
@@ -15,8 +15,12 @@ interface UploadInfo {
 
 interface RegisterStore {
   temp: Partial<Register>;
+  tempUpload?: File;
+
   setTemp: (data: Partial<Register>) => void;
   clearTemp: () => void;
+  setTempUpload: (file: File) => void;
+  clearTempUpload: () => void;
 
   addRegister: (c: Register) => void;
   getRegisters: () => Register[];
@@ -25,10 +29,14 @@ interface RegisterStore {
   getUploads: () => UploadInfo[];
 }
 
-export const useRegisterStore = create<RegisterStore>((set) => ({
+const useRegisterStore = create<RegisterStore>((set) => ({
   temp: {},
+  tempUpload: undefined,
+
   setTemp: (data) => set((state) => ({ temp: { ...state.temp, ...data } })),
   clearTemp: () => set({ temp: {} }),
+  setTempUpload: (file) => set({ tempUpload: file }),
+  clearTempUpload: () => set({ tempUpload: undefined }),
 
   addRegister: (register) => {
     const existing = JSON.parse(localStorage.getItem('registers') || '[]');
@@ -50,3 +58,5 @@ export const useRegisterStore = create<RegisterStore>((set) => ({
     return JSON.parse(localStorage.getItem('uploads') || '[]');
   },
 }));
+
+export default useRegisterStore;

@@ -1,53 +1,49 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useRegisterStore from 'shared/stores/registerStore';
+import FileUpload from 'shared/components/FileUpload';
+import Button from 'shared/components/Button';
 
 export default function Upload({ email }: { email?: string }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [emailParam, setEmailParam] = useState(email || '');
-
-  useEffect(() => {
-    if (!email) {
-      const params = new URLSearchParams(window.location.search);
-      const fromQuery = params.get('email');
-      if (fromQuery) setEmailParam(fromQuery);
-    }
-  }, [email]);
-
+  const { setTempUpload, clearTempUpload } = useRegisterStore();
   const handleUpload = () => {
-    alert(`Enviando ${selectedFile?.name} para ${emailParam || 'usuário anônimo'}`);
+    if (!selectedFile) return alert('Select a file to upload.');
+    setTempUpload(selectedFile);
+    window.history.back();
+  };
+
+  const goBack = () => {
+    clearTempUpload();
+    window.history.back();
   };
 
   return (
-    <div style={{ padding: 32 }}>
-      <h2>Documentação (email qdo receber)</h2>
+    <div style={{ padding: 32, fontFamily: 'sans-serif' }}>
+      <h2 style={{ marginBottom: 24 }}>Enviar Documentação {email && `(${email})`}</h2>
 
-      <label>Example file input</label>
-      <input
-        type="file"
-        onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
-        style={{ display: 'block', marginBottom: 16 }}
+      <FileUpload
+        label="Selecionar Arquivo"
+        accept=".pdf,.jpg,.png"
+        onUpload={(files: FileList) => {
+          setSelectedFile(files[0]);
+          setTempUpload(files[0]);
+        }}
       />
 
-      <div>
-        <button onClick={() => alert('Cancelado')} style={styles.secondary}>Cancel</button>
-        <button onClick={handleUpload} style={styles.primary}>Ok</button>
+      {selectedFile && (
+        <p style={{ marginTop: 12, color: '#007bff' }}>
+          Arquivo selecionado: <strong>{selectedFile.name}</strong>
+        </p>
+      )}
+
+      <div style={{ marginTop: 24 }}>
+        <Button onClick={goBack} style={{ backgroundColor: '#6c757d' }}>
+          Cancelar
+        </Button>
+        <Button onClick={handleUpload} style={{ marginLeft: 8 }}>
+          Enviar
+        </Button>
       </div>
     </div>
   );
 }
-
-const styles = {
-  primary: {
-    marginLeft: 8,
-    padding: '8px 16px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 4,
-  },
-  secondary: {
-    padding: '8px 16px',
-    backgroundColor: '#ccc',
-    border: 'none',
-    borderRadius: 4,
-  },
-};
