@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
           upload: `${getRemoteUrl('5002')}/upload/assets/remoteEntry.js`,
         },
         exposes: {
-          './authStore': './src/stores/user.ts',
+          './authStore': './src/stores/authStore.ts',
         },
         shared: ['react', 'react-dom', 'zustand']
       })
