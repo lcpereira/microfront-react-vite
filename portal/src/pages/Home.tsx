@@ -47,7 +47,7 @@ export default function Home() {
 
   useEffect(() => {
     if (tmpStore.tempUpload && !tmpStore.temp?.email) {
-      const fileName = tmpStore.tempUpload.name;
+      const fileName = tmpStore.tempUpload;
       const timestamp = Date.now();
 
       registerStore.addUpload({ fileName, timestamp });
