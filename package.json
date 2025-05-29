@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "all": "run-p install:shared install:portal install:register install:upload",
+    "install:portal": "cd portal && yarn install",
+    "install:shared": "cd shared && yarn install",
+    "install:register": "cd register && yarn install",
+    "install:upload": "cd upload && yarn install",
     "dev": "run-p preview:shared dev:portal preview:register preview:upload",
     "dev:portal": "cd portal && yarn dev --mode development",
     "preview:shared": "cd shared && yarn build --mode development && yarn preview --port 5001",

@@ -24,6 +24,18 @@ Este projeto implementa uma arquitetura de micro frontends utilizando **Vite** e
 
 ## ▶️ Como rodar localmente
 
+> Para instalar a dependência mínima, rode na raiz:
+
+```bash
+yarn install
+```
+
+> Para instalar a dependência de todas as aplicações ao mesmo tempo:
+
+```bash
+yarn all
+```
+
 > Para rodar todas as aplicações ao mesmo tempo em ambiente de desenvolvimento:
 
 ```bash
@@ -36,6 +48,8 @@ Esse comando irá:
 - Rodar o projeto `portal` em modo de desenvolvimento
 
 > Isso permite que o **portal** consuma os micro frontends e o código compartilhado corretamente.
+
+Feito esses passos, é só acessar http://localhost:5000/microfront-react-vite
 
 ---
 
