@@ -71,6 +71,7 @@ jobs:
           cd portal
           yarn install
           yarn build
+          cp dist/index.html dist/404.html
           cd ..
           cp -R portal/dist/* final-dist/
 

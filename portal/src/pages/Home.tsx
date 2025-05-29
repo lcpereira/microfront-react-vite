@@ -15,13 +15,13 @@ export default function Home() {
       </div>
 
       <div style={{ padding: 16 }}>
-        <button onClick={() => goTo('/a')} style={styles.link}>
+        <button onClick={() => goTo('/home')} style={styles.link}>
           Regular link
         </button>
-        <button onClick={() => goTo('/b')} style={{ ...styles.link, background: '#007bff', color: '#fff' }}>
+        <button onClick={() => goTo('/register')} style={{ ...styles.link, background: '#007bff', color: '#fff' }}>
           Active link
         </button>
-        <button onClick={() => goTo('/c')} style={styles.link}>
+        <button onClick={() => goTo('/upload')} style={styles.link}>
           Another link
         </button>
       </div>
