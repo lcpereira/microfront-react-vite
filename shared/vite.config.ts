@@ -17,6 +17,8 @@ export default defineConfig(() => {
           './stores/tmpStore': './src/stores/tmpStore.ts',
           './components/Button': './src/components/Button.tsx',
           './components/Input': './src/components/Input.tsx',
+          './components/Select': './src/components/Select.tsx',
+          './components/Textarea': './src/components/Textarea.tsx',
           './components/Checkbox': './src/components/Checkbox.tsx',
           './components/Layout': './src/components/Layout.tsx',
           './components/Table': './src/components/Table.tsx',

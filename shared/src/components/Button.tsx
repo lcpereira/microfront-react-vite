@@ -1,9 +1,19 @@
 import { type ButtonHTMLAttributes } from 'react';
 import theme from '../theme/theme';
 
-export default function Button({ style, children, ...res }: ButtonHTMLAttributes<HTMLButtonElement>) {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  secondary?: boolean;
+}
+
+export default function Button({ secondary, style, children, ...res }: Props) {
+  const appliedStyle = {
+    ...styles.button,
+    ...(secondary ? styles.secondary : {}),
+    ...style,
+  };
+
   return (
-    <button style={{...styles.button, ...style}} {...res}>
+    <button style={appliedStyle} {...res}>
       {children}
     </button>
   );
@@ -21,5 +31,8 @@ const styles = {
     fontSize: theme.fontSize.base,
     fontFamily: theme.fonts.body,
     boxShadow: theme.shadows.sm,
+  },
+  secondary: {
+    background: theme.colors.secondary,
   },
 };

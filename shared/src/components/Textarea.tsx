@@ -1,15 +1,15 @@
 import theme from '../theme/theme';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
 }
 
-export default function Input({ label, style, ...rest }: Props) {
+export default function Textarea({ label, style, ...rest }: Props) {
   return (
     <>
       {label && <label style={styles.label}>{label}</label>}
-      <input
-        style={{ ...styles.input, ...style }}
+      <textarea
+        style={{ ...styles.textarea, ...style }}
         {...rest}
       />
     </>
@@ -17,7 +17,7 @@ export default function Input({ label, style, ...rest }: Props) {
 }
 
 const styles = {
-  input: {
+  textarea: {
     display: 'block',
     width: '100%',
     marginBottom: theme.spacing.sm,
@@ -27,6 +27,7 @@ const styles = {
     borderRadius: theme.borderRadius.sm,
     border: `1px solid ${theme.colors.border}`,
     boxSizing: 'border-box' as const,
+    resize: 'vertical' as const,
   },
   label: {
     display: 'block',

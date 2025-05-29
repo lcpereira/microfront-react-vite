@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useTmpStore from 'shared/stores/tmpStore';
 import FileUpload from 'shared/components/FileUpload';
 import Button from 'shared/components/Button';
+import theme from 'shared/theme';
 
 export default function Upload() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -19,7 +20,7 @@ export default function Upload() {
   };
 
   return (
-    <div style={{ padding: 32, fontFamily: 'sans-serif' }}>
+    <div style={styles.container}>
       <h2 style={{ marginBottom: 24 }}>Enviar Documentação {temp?.email && `(${temp.email})`}</h2>
 
       <FileUpload
@@ -32,13 +33,13 @@ export default function Upload() {
       />
 
       {selectedFile && (
-        <p style={{ marginTop: 12, color: '#007bff' }}>
+        <p style={{ marginTop: 12, color: theme.colors.primary }}>
           Arquivo selecionado: <strong>{selectedFile.name}</strong>
         </p>
       )}
 
       <div style={{ marginTop: 24 }}>
-        <Button onClick={goBack} style={{ backgroundColor: '#6c757d' }}>
+        <Button onClick={goBack} secondary>
           Cancelar
         </Button>
         <Button onClick={handleUpload} style={{ marginLeft: 8 }}>
@@ -48,3 +49,11 @@ export default function Upload() {
     </div>
   );
 }
+
+const styles = {
+  container: {
+    padding: 32,
+    maxWidth: 600,
+    margin: '0 auto',
+  },
+};
