@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import useRegisterStore from 'shared/stores/registerStore';
+import useTmpStore from 'shared/stores/tmpStore';
 import FileUpload from 'shared/components/FileUpload';
 import Button from 'shared/components/Button';
 
-export default function Upload({ email }: { email?: string }) {
+export default function Upload() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const { setTempUpload, clearTempUpload } = useRegisterStore();
+  const { temp, setTempUpload, clearTempUpload } = useTmpStore();
+
   const handleUpload = () => {
     if (!selectedFile) return alert('Select a file to upload.');
-    setTempUpload(selectedFile);
+    setTempUpload(selectedFile.name);
     window.history.back();
   };
 
@@ -19,7 +20,7 @@ export default function Upload({ email }: { email?: string }) {
 
   return (
     <div style={{ padding: 32, fontFamily: 'sans-serif' }}>
-      <h2 style={{ marginBottom: 24 }}>Enviar Documentação {email && `(${email})`}</h2>
+      <h2 style={{ marginBottom: 24 }}>Enviar Documentação {temp?.email && `(${temp.email})`}</h2>
 
       <FileUpload
         label="Selecionar Arquivo"

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from 'shared/stores/authStore';
+import useTmpStore from 'shared/stores/tmpStore';
 import useRegisterStore from 'shared/stores/registerStore';
 import Layout from 'shared/components/Layout';
 import Table from 'shared/components/Table';
@@ -11,6 +12,7 @@ export default function Home() {
   const { user } = useAuthStore();
   const navigate = useNavigate();
   const registerStore = useRegisterStore();
+  const tmpStore = useTmpStore();
 
   const registers = registerStore.getRegisters();
   const uploads = registerStore.getUploads();
@@ -27,27 +29,34 @@ export default function Home() {
       render: (row) => row.multiSelect.join(', '),
     },
     { key: 'text', label: 'Texto livre' },
-    { key: 'file', label: 'Arquivo' },
+    {
+      key: 'file',
+      label: 'File',
+      render: (row) => row.file && `${row.file.fileName} ${new Date(row.file.timestamp).toLocaleString()}`,
+    },
   ]);
 
   const uploadColumns = ([
-    { key: 'fileName', label: 'Arquivo' },
+    { key: 'fileName', label: 'File' },
     {
       key: 'timestamp',
-      label: 'Data',
+      label: 'Date',
       render: (row) => new Date(row.timestamp).toLocaleString(),
     },
   ]);
 
   useEffect(() => {
-    if (registerStore.tempUpload) {
-      const fileName = registerStore.tempUpload.name;
+    if (tmpStore.tempUpload && !tmpStore.temp?.email) {
+      const fileName = tmpStore.tempUpload.name;
       const timestamp = Date.now();
 
       registerStore.addUpload({ fileName, timestamp });
-      registerStore.clearTempUpload();
+      tmpStore.clearTempUpload();
+    } else {
+      tmpStore.clearTemp();
+      tmpStore.clearTempUpload();
     }
-  }, [registerStore, registerStore.tempUpload])
+  }, []);
 
   return (
     <Layout>

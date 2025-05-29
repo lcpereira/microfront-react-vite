@@ -14,6 +14,7 @@ export default defineConfig(() => {
           './theme': './src/theme/theme.ts',
           './stores/authStore': './src/stores/authStore.ts',
           './stores/registerStore': './src/stores/registerStore.ts',
+          './stores/tmpStore': './src/stores/tmpStore.ts',
           './components/Button': './src/components/Button.tsx',
           './components/Input': './src/components/Input.tsx',
           './components/Checkbox': './src/components/Checkbox.tsx',

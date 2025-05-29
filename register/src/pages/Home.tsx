@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useRegisterStore from 'shared/stores/registerStore';
+import useTmpStore from 'shared/stores/tmpStore';
+import Button from 'shared/components/Button';
 
 export default function Home() {
   const [email, setEmail] = useState('');
@@ -6,9 +9,39 @@ export default function Home() {
   const [multiSelect, setMultiSelect] = useState<string[]>([]);
   const [textarea, setTextarea] = useState('');
 
-  const handleUpload = () => alert('Upload iniciado...');
-  const handleOk = () => alert('Cadastro enviado!');
-  const handleCancel = () => alert('Cadastro cancelado.');
+  const registerStore = useRegisterStore();
+  const tmpStore = useTmpStore();
+
+  useEffect(() => {
+    const { email, select, multiSelect, text } = tmpStore.temp || {};
+
+    if (email) setEmail(email);
+    if (select) setSelect(select);
+    if (multiSelect) setMultiSelect(multiSelect);
+    if (text) setTextarea(text);
+  }, [tmpStore.temp]);
+
+  const handleUpload = () => {
+    tmpStore.setTemp({ email, select, multiSelect, text: textarea });
+    window.location.href = '/microfront-react-vite/register/upload';
+  };
+
+  const handleRegister = () => {
+    registerStore.addRegister({
+      ...tmpStore.temp,
+      file: tmpStore.tempUpload && { fileName: tmpStore.tempUpload, timestamp: Date.now() },
+    });
+
+    tmpStore.clearTemp();
+    tmpStore.clearTempUpload();
+    window.history.back();
+  };
+
+  const handleCancel = () => {
+    tmpStore.clearTemp();
+    tmpStore.clearTempUpload();
+    window.history.back();
+  };
 
   return (
     <div style={{ padding: 32 }}>
@@ -51,18 +84,19 @@ export default function Home() {
       />
 
       <div style={{ marginTop: 12 }}>
-        <button onClick={handleUpload} style={styles.primary}>
-          Upload de Documento
-        </button>
+        <Button onClick={handleUpload}>Upload de Documento</Button>
+        {tmpStore.tempUpload && (
+          <p style={{ marginTop: 12, color: '#007bff' }}>
+            Arquivo selecionado: <strong>{tmpStore.tempUpload}</strong>
+          </p>
+        )}
       </div>
 
       <div style={{ marginTop: 16 }}>
-        <button onClick={handleCancel} style={styles.secondary}>
+        <Button onClick={handleCancel} style={styles.secondary}>
           Cancel
-        </button>
-        <button onClick={handleOk} style={styles.primary}>
-          Ok
-        </button>
+        </Button>
+        <Button onClick={handleRegister} style={{ marginLeft: 8 }}>Enviar</Button>
       </div>
     </div>
   );
@@ -76,18 +110,7 @@ const styles = {
     width: '100%',
     maxWidth: 400,
   },
-  primary: {
-    marginRight: 8,
-    padding: '8px 16px',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: 4,
-  },
   secondary: {
-    padding: '8px 16px',
     backgroundColor: '#ccc',
-    border: 'none',
-    borderRadius: 4,
   },
 };
