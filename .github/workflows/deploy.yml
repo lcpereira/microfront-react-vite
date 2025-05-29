@@ -54,11 +54,17 @@ jobs:
         with:
           node-version: 20
 
-      - name: Download all partials
+      - name: Download dist of register
         uses: actions/download-artifact@v4
         with:
-          path: final-dist
-          merge-multiple: true
+          name: partial-dist-register
+          path: final-dist/register
+
+      - name: Download dist of upload
+        uses: actions/download-artifact@v4
+        with:
+          name: partial-dist-upload
+          path: final-dist/upload
 
       - name: Build Portal
         run: |
